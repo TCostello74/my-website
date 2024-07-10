@@ -1,0 +1,20 @@
+#topics-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.topic-card {
+    flex: 1 1 calc(50% - 1rem);
+    margin: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.topic-card h3 {
+    margin-top: 0;
+}
+
+.post {
+    margin-top: 0.5rem;
+}
