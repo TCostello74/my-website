@@ -52,12 +52,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderTopics() {
-        topicsContainer.innerHTML = topics.map(topic => `
+        topicsContainer.innerHTML = topics.map((topic, index) => `
             <div class="topic-card">
                 <h3>${topic.name}</h3>
                 ${topic.posts.map(post => `<div class="post"><strong>${post.date}:</strong> ${post.content}</div>`).join("")}
+                <input type="text" class="form-control mb-2" placeholder="New post for ${topic.name}" onkeypress="handlePostInput(event, ${index})">
             </div>
         `).join("");
+    }
+
+    window.handlePostInput = function(event, topicIndex) {
+        if (event.key === "Enter") {
+            const postContent = event.target.value.trim();
+            const postDate = new Date().toLocaleDateString();
+            if (postContent) {
+                const newPost = { content: postContent, date: postDate };
+                topics[topicIndex].posts.push(newPost);
+                localStorage.setItem("topics", JSON.stringify(topics));
+                renderTopics();
+            }
+        }
     }
 
     renderTopics();
